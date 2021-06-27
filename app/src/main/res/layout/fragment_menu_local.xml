@@ -12,5 +12,28 @@
         android:layout_height="318dp">
 
     </com.google.android.gms.maps.MapView>
+    <Button
+        android:id="@+id/btngps"
+        android:layout_width="wrap_content"
+        android:text="COORDENADAS"
+        android:layout_height="wrap_content">
+
+    </Button>
+    <TextView
+        android:id="@+id/txtLati"
+        android:layout_width="wrap_content"
+        android:text="lat"
+        android:layout_height="wrap_content">
+
+    </TextView>
+    <TextView
+        android:id="@+id/txtLon"
+        android:layout_width="wrap_content"
+        android:text="lon"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+
 
 </LinearLayout>
