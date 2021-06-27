@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.controlpark.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_rolesFragment2"
+            app:destination="@id/rolesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rolesFragment"
+        android:name="com.example.controlpark.RolesFragment"
+        android:label="Roles"
+        tools:layout="@layout/fragment_roles" >
+        <action
+            android:id="@+id/action_rolesFragment_to_choferFragment"
+            app:destination="@id/choferFragment" />
+        <action
+            android:id="@+id/action_rolesFragment_to_localFragment"
+            app:destination="@id/localFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/choferFragment"
+        android:name="com.example.controlpark.MenuChoferFragment"
+        android:label="Chofer"
+        tools:layout="@layout/fragment_menu_chofer" >
+        <action
+            android:id="@+id/action_choferFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/localFragment"
+        android:name="com.example.controlpark.MenuLocalFragment"
+        android:label="Local"
+        tools:layout="@layout/fragment_menu_local" />
+
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.example.controlpark.PerfilFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+
+</navigation>

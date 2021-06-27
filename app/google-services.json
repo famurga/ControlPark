@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "310237054219",
+    "firebase_url": "https://controlparkges-default-rtdb.firebaseio.com",
+    "project_id": "controlparkges",
+    "storage_bucket": "controlparkges.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310237054219:android:22ab00537a43f9af014e0e",
+        "android_client_info": {
+          "package_name": "com.example.controlpark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310237054219-r38isqt50jhu3gatpvjc90je4g9rsvsn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.controlpark",
+            "certificate_hash": "2ae2b7187898f6a4a97fd4c5de8b5b379b68dd63"
+          }
+        },
+        {
+          "client_id": "310237054219-bsnldjb9heri1j8picp2aa8tb2ea4946.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWE5A12w7ZwJ1CxR9Mb3jAUNdXo0L2pBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310237054219-bsnldjb9heri1j8picp2aa8tb2ea4946.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
