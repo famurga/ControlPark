@@ -42,6 +42,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -51,6 +52,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -58,7 +60,7 @@ import java.util.ArrayList;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
+public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,GoogleMap.OnInfoWindowClickListener{
     TextView txtNombre;
     ImageView imguser;
 
@@ -92,6 +94,7 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mview= inflater.inflate(R.layout.fragment_menu_chofer, container, false);
+
         imguser = mview.findViewById(R.id.imgUsuario);
         imguser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,6 +192,8 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.addMarker(new MarkerOptions().position(new LatLng(-16.3846,-71.5243695))
                 .title("MI POSICION ALEATORIA").snippet("ewrwerwerw"));
+        googleMap.setOnInfoWindowClickListener(this);
+
         googleMap.addMarker(new MarkerOptions().position(new LatLng(-16.3546,-71.5243698))
                 .title("gggggggg").snippet("ggggggg"));
         addMarker(googleMap);
@@ -307,6 +312,56 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
 
 
 
+
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Toast.makeText(getContext(),   marker.getTitle(),
+                Toast.LENGTH_SHORT).show();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("name",marker.getTitle());
+        getParentFragmentManager().setFragmentResult("key",bundle);
+
+        Navigation.findNavController(mview).navigate(R.id.action_choferFragment_to_rutaEstacionamientoFragment);
+
+
+
+    }
+
+    public void verificarExistencia(String dato){
+
+        Query consulta = FirebaseDatabase.getInstance().getReference()
+                .child("Estacionamientos").child("lista").child("listado").orderByChild("nombre").equalTo(dato);
+        consulta.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+                    for( DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                        Estacionamiento estacionamiento = dataSnapshot1.getValue(Estacionamiento.class);
+                        String nombre = estacionamiento.getNombre();
+                        String direccion = estacionamiento.getDirección();
+                        String descripcion = estacionamiento.getDescripcion();
+                        double latitud = estacionamiento.getLatitud();
+                        double longitud = estacionamiento.getLongitud();
+                        int espacios = estacionamiento.getEspaciosDisponibles();
+
+                    }
+
+                }
+                else{
+                    Toast.makeText(getActivity(), "No se encuentra ese dato", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

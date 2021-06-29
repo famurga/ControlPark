@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_choferFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
+        <action
+            android:id="@+id/action_choferFragment_to_rutaEstacionamientoFragment"
+            app:destination="@id/rutaEstacionamientoFragment" />
     </fragment>
 
     <fragment
@@ -48,6 +51,11 @@
         android:name="com.example.controlpark.PerfilFragment"
         android:label="Perfil"
         tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/rutaEstacionamientoFragment"
+        android:name="com.example.controlpark.RutaEstacionamientoFragment"
+        android:label="fragment_ruta_estacionamiento"
+        tools:layout="@layout/fragment_ruta_estacionamiento" />
 
 
 </navigation>
