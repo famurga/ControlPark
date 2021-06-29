@@ -67,6 +67,8 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
     MapView mapView;
     View mview;
 
+
+
     AdapterActivity adapterActivity;
     RecyclerView recyclerViewEstacionamientos;
     ArrayList<Estacionamiento> listaEstacionamientos;
@@ -134,9 +136,6 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
 
 
         }
-
-
-
         recyclerViewEstacionamientos = mview.findViewById(R.id.recyclerView);
 
         recyclerViewEstacionamientos.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -188,10 +187,52 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
         mgoogleMap.setMyLocationEnabled(true);
 
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(-16.3846,-71.5243695)).title("MI POSICION ALEATORIA").snippet("ewrwerwerw"));
-        CameraPosition Liberty = CameraPosition.builder().target(new LatLng(-16.3846,-71.5243695)).zoom(18).bearing(0).tilt(45).build();
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(-16.3846,-71.5243695))
+                .title("MI POSICION ALEATORIA").snippet("ewrwerwerw"));
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(-16.3546,-71.5243698))
+                .title("gggggggg").snippet("ggggggg"));
+        addMarker(googleMap);
+        CameraPosition Liberty = CameraPosition.builder().target(new LatLng(-16.3846,-71.5243695)).zoom(15).bearing(0).tilt(45).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));
 
+
+
+
+    }
+
+    public void addMarker(GoogleMap googleMap){
+
+
+
+
+        mDataBase.child("Estacionamientos").child("lista").child("listado").
+                addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+                    for( DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                        Estacionamiento estacionamiento = dataSnapshot1.getValue(Estacionamiento.class);
+                        String nombre = estacionamiento.getNombre();
+                        String descripcion = estacionamiento.getDescripcion();
+                        double latitud = estacionamiento.getLatitud();
+                        double longitud = estacionamiento.getLongitud();
+                        int espacios = estacionamiento.getEspaciosDisponibles();
+
+                        // Toast.makeText(getContext(), "Llega la descripcion"+Descripcion, Toast.LENGTH_SHORT).show();
+                        mgoogleMap = googleMap;
+                        googleMap.addMarker(new MarkerOptions().position(new LatLng(latitud,longitud))
+                                .title(nombre).snippet(descripcion));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
@@ -269,6 +310,7 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    /*
     public void miLocalizacion(){
 
         LocationManager locationManager = (LocationManager) getActivity().
@@ -303,5 +345,10 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback {
         int permision = ContextCompat.checkSelfPermission(getActivity(), ACCESS_FINE_LOCATION);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
                 locationListener);
+
+
+
     }
+*/
+
 }
