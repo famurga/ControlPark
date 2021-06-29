@@ -17,8 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.controlpark.metodos.CargarEnBaseDatos;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -27,6 +29,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -41,6 +45,14 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
     TextView txtLongitud;
     Button gps;
 
+    //Formulario
+    EditText name,dir,des,lat,lon,espacios;
+    Button btncrear;
+    String nomb,lati,longi,espa, desc,dire;
+    double dlati,dlong;
+
+    DatabaseReference mDataBase;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +64,7 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mview= inflater.inflate(R.layout.fragment_menu_local, container, false);
-
+        mDataBase = FirebaseDatabase.getInstance().getReference();
 
         int permisoUbicacion = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
         int permisoUbicacion2 = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -76,6 +88,19 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
         txtLatitud = mview.findViewById(R.id.txtLati);
         txtLongitud = mview.findViewById(R.id.txtLon);
         gps = mview.findViewById(R.id.btngps);
+        //Formulario
+        name=mview.findViewById(R.id.edtNombre);
+        dir=mview.findViewById(R.id.edtDir);
+        des=mview.findViewById(R.id.edtDesc);
+        lat=mview.findViewById(R.id.edtLat);
+        lon=mview.findViewById(R.id.edtLong);
+        espacios=mview.findViewById(R.id.edtEspacios);
+        btncrear=mview.findViewById(R.id.btnCrear);
+
+
+
+
+
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +108,25 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        btncrear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                nomb = name.getText().toString();
+                dire = dir.getText().toString();
+                desc = des.getText().toString();
+                lati = lat.getText().toString();
+                longi = lon.getText().toString();
+                espa = espacios.getText().toString();
+
+                dlati = Double.parseDouble(lati);
+                dlong = Double.parseDouble(longi);
+
+                CargarEnBaseDatos c = new CargarEnBaseDatos();
+                c.cargarDatosFirebase(nomb,dire,desc,dlati,dlong,espa);
+
+            }
+        });
 
 
 
