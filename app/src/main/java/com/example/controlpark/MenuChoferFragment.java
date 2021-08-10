@@ -30,6 +30,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.controlpark.Adaptadores.AdapterActivity;
 import com.example.controlpark.Model.Estacionamiento;
@@ -55,6 +61,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -69,6 +78,8 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,G
     MapView mapView;
     View mview;
 
+    Boolean actualPosition = true;
+
 
 
     AdapterActivity adapterActivity;
@@ -80,12 +91,16 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,G
     int imagen;
     DatabaseReference mDataBase;
 
+    Double longitudOrigen=5.5, latitudOrigen=5.6;
+
     Activity activity;
     //    iComunicaFragments interfazComunicaFragments;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -164,7 +179,6 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,G
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mapView = (MapView) mview.findViewById(R.id.map);
         if (mapView != null) {
             mapView.onCreate(null);
@@ -176,39 +190,92 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,G
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+
+        mgoogleMap = googleMap;
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        1);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+
+
+
 
             return;
         }
 
 
-        MapsInitializer.initialize(getContext());
-
-        mgoogleMap = googleMap;
         mgoogleMap.setMyLocationEnabled(true);
 
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(-16.3846,-71.5243695))
-                .title("MI POSICION ALEATORIA").snippet("ewrwerwerw"));
-        googleMap.setOnInfoWindowClickListener(this);
+        mgoogleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(-16.3546,-71.5243698))
-                .title("gggggggg").snippet("ggggggg"));
-        addMarker(googleMap);
-        CameraPosition Liberty = CameraPosition.builder().target(new LatLng(-16.3846,-71.5243695)).zoom(15).bearing(0).tilt(45).build();
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));
+                //2.942043!4d-75.2522789
+
+
+                if (actualPosition){
+                    latitudOrigen = location.getLatitude();
+                    longitudOrigen = location.getLongitude();
+                    actualPosition=false;
+
+                    LatLng miPosicion = new LatLng(latitudOrigen,longitudOrigen);
+
+
+
+                    googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+
+                    addMarker(googleMap);
+                    CameraPosition Liberty = CameraPosition.builder().target(new LatLng(latitudOrigen,longitudOrigen)).zoom(14).bearing(0).tilt(45).build();
+                    googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));
+
+
+                }
+            }
+        });
+
+        googleMap.setOnInfoWindowClickListener(this);
 
 
 
 
     }
 
+
     public void addMarker(GoogleMap googleMap){
-
-
-
 
         mDataBase.child("Estacionamientos").child("lista").child("listado").
                 addValueEventListener(new ValueEventListener() {
@@ -223,12 +290,13 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,G
                         String descripcion = estacionamiento.getDescripcion();
                         double latitud = estacionamiento.getLatitud();
                         double longitud = estacionamiento.getLongitud();
-                        int espacios = estacionamiento.getEspaciosDisponibles();
+                        int espacios = estacionamiento.getEspacios();
+                        double precio = estacionamiento.getPrecio();
 
                         // Toast.makeText(getContext(), "Llega la descripcion"+Descripcion, Toast.LENGTH_SHORT).show();
                         mgoogleMap = googleMap;
                         googleMap.addMarker(new MarkerOptions().position(new LatLng(latitud,longitud))
-                                .title(nombre).snippet(descripcion));
+                                .title(nombre).snippet("Espacios:"+espacios +"-Precio:"+precio));
                     }
                 }
             }
@@ -274,12 +342,15 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,G
                         String descripcion = estacionamiento.getDescripcion();
                         double latitud = estacionamiento.getLatitud();
                         double longitud = estacionamiento.getLongitud();
-                        int espacios = estacionamiento.getEspaciosDisponibles();
+                        int espacios = estacionamiento.getEspacios();
+                        double precio = estacionamiento.getPrecio();
+
+                        Log.e("Direccion", "onDataChange: "+direccion );
 
 
                         // Toast.makeText(getContext(), "Llega la descripcion"+Descripcion, Toast.LENGTH_SHORT).show();
 
-                        listaEstacionamientos.add(new Estacionamiento(nombre,direccion,descripcion,latitud,longitud,espacios));
+                        listaEstacionamientos.add(new Estacionamiento(nombre,direccion,descripcion,latitud,longitud,espacios,precio));
 
                     }
 
@@ -324,7 +395,7 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,G
         bundle.putString("name",marker.getTitle());
         getParentFragmentManager().setFragmentResult("key",bundle);
 
-        Navigation.findNavController(mview).navigate(R.id.action_choferFragment_to_rutaEstacionamientoFragment);
+        Navigation.findNavController(mview).navigate(R.id.action_choferFragment_to_ruta_v2_Fragment);
 
 
 
@@ -347,7 +418,7 @@ public class MenuChoferFragment extends Fragment implements OnMapReadyCallback,G
                         String descripcion = estacionamiento.getDescripcion();
                         double latitud = estacionamiento.getLatitud();
                         double longitud = estacionamiento.getLongitud();
-                        int espacios = estacionamiento.getEspaciosDisponibles();
+                        int espacios = estacionamiento.getEspacios();
 
                     }
 

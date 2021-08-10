@@ -35,30 +35,6 @@
             >
         </TextView>
 
-        <TextView
-            android:id="@+id/Direccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Direccion:"
-            android:textSize="15sp"
-            android:layout_below="@id/txtnombreEstacionamiento"
-            android:layout_toEndOf="@id/imagenEstacionamiento"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toRightOf="@id/imagenEstacionamiento">
-        </TextView>
-        <TextView
-            android:id="@+id/txtDireccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Direccion"
-            android:textSize="15sp"
-            android:layout_below="@id/txtnombreEstacionamiento"
-            android:layout_toEndOf="@id/Direccion"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toRightOf="@id/Direccion">
-        </TextView>
 
         <TextView
             android:id="@+id/Descripcion"
@@ -66,7 +42,7 @@
             android:layout_height="wrap_content"
             android:text="Descripcion:"
             android:textSize="15sp"
-            android:layout_below="@id/txtDireccion"
+            android:layout_below="@id/txtnombreEstacionamiento"
             android:layout_toEndOf="@id/imagenEstacionamiento"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
@@ -78,62 +54,13 @@
             android:layout_height="wrap_content"
             android:text="Descripcion"
             android:textSize="15sp"
-            android:layout_below="@id/txtDireccion"
+            android:layout_below="@id/txtnombreEstacionamiento"
             android:layout_toEndOf="@id/Descripcion"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_toRightOf="@id/Descripcion">
         </TextView>
 
-        <TextView
-            android:id="@+id/Latitud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Latitud:"
-            android:textSize="15sp"
-            android:layout_below="@id/txtDescripcion"
-            android:layout_toEndOf="@id/imagenEstacionamiento"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toRightOf="@id/imagenEstacionamiento">
-        </TextView>
-        <TextView
-            android:id="@+id/txtlatitud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Latitud"
-            android:textSize="15sp"
-            android:layout_below="@id/txtDescripcion"
-            android:layout_toEndOf="@id/Latitud"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toRightOf="@id/Latitud">
-        </TextView>
-
-        <TextView
-            android:id="@+id/Longitud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Longitud:"
-            android:textSize="15sp"
-            android:layout_below="@id/txtlatitud"
-            android:layout_toEndOf="@id/imagenEstacionamiento"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toRightOf="@id/imagenEstacionamiento">
-        </TextView>
-        <TextView
-            android:id="@+id/txtLongitud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Longitud"
-            android:textSize="15sp"
-            android:layout_below="@id/txtlatitud"
-            android:layout_toEndOf="@id/Longitud"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toRightOf="@id/Longitud">
-        </TextView>
 
         <TextView
             android:id="@+id/Espacios"
@@ -141,7 +68,7 @@
             android:layout_height="wrap_content"
             android:text="Espacios:"
             android:textSize="15sp"
-            android:layout_below="@id/txtLongitud"
+            android:layout_below="@id/txtDescripcion"
             android:layout_toEndOf="@id/imagenEstacionamiento"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
@@ -151,15 +78,37 @@
             android:id="@+id/txtEspacios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Espacios"
             android:textSize="15sp"
-            android:layout_below="@id/txtLongitud"
+            android:layout_below="@id/txtDescripcion"
             android:layout_toEndOf="@id/Espacios"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_toRightOf="@id/Espacios">
         </TextView>
-
+        <TextView
+            android:id="@+id/Precio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio:"
+            android:textSize="15sp"
+            android:layout_below="@id/txtEspacios"
+            android:layout_toEndOf="@id/imagenEstacionamiento"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@id/imagenEstacionamiento">
+        </TextView>
+        <TextView
+            android:id="@+id/txtPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PRECIOOO"
+            android:textSize="15sp"
+            android:layout_below="@id/txtEspacios"
+            android:layout_toEndOf="@id/Precio"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@id/Precio">
+        </TextView>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

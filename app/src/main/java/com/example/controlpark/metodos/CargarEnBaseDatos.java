@@ -41,7 +41,7 @@ public class CargarEnBaseDatos extends AppCompatActivity {
 
 
     public void cargarDatosFirebase(String nombre,String direccion, String descripcion, double latitud, double longitud ,
-                                    String espacios) {
+                                    int espacios, double precio) {
 
 
 
@@ -55,6 +55,7 @@ public class CargarEnBaseDatos extends AppCompatActivity {
         datosEstacionamientos.put("latitud", latitud);
         datosEstacionamientos.put("longitud", longitud);
         datosEstacionamientos.put("espacios", espacios);
+        datosEstacionamientos.put("precio", precio);
 
 
 

@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/carrologo"
     tools:context=".LoginFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:src="@drawable/p"></ImageView>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btnGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        >
+        android:layout_marginTop="370dp"
+  >
+
     </com.google.android.gms.common.SignInButton>
 
-</FrameLayout>
+</LinearLayout>

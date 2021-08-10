@@ -5,22 +5,25 @@ import java.io.Serializable;
 public class Estacionamiento implements Serializable {
 
     private String nombre;
-    private String dirección;
+   private String direccion;
     private String descripcion;
     private double latitud;
     private double longitud;
-    private int espaciosDisponibles;
+    private int espacios;
+    private double precio;
 
     public Estacionamiento(){
 
     }
-    public Estacionamiento(String nombre, String dirección,String descripcion, double latitud, double longitud, int espaciosDisponibles) {
+    public Estacionamiento(String nombre, String direccion,String descripcion, double latitud, double longitud, int espacios,double precio) {
         this.nombre = nombre;
-        this.dirección = dirección;
+        this.direccion = direccion;
         this.descripcion = descripcion;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.espaciosDisponibles = espaciosDisponibles;
+        this.espacios = espacios;
+        this.precio = precio;
+
     }
 
 
@@ -32,11 +35,12 @@ public class Estacionamiento implements Serializable {
     }
 
     public String getDirección() {
-        return dirección;
+
+        return direccion;
     }
 
-    public void setDirección(String dirección) {
-        this.dirección = dirección;
+    public void setDirección(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getDescripcion() {
@@ -61,11 +65,19 @@ public class Estacionamiento implements Serializable {
         this.longitud = longitud;
     }
 
-    public int getEspaciosDisponibles() {
-        return espaciosDisponibles;
+    public int getEspacios() {
+
+        return espacios;
     }
-    public void setEspaciosDisponibles(int espaciosDisponibles) {
-        this.espaciosDisponibles = espaciosDisponibles;
+    public void setEspacios(int espacios) {
+        this.espacios = espacios;
+    }
+    public double getPrecio() {
+
+        return precio;
+    }
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
 

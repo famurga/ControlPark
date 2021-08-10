@@ -24,8 +24,8 @@
             android:id="@+id/action_rolesFragment_to_choferFragment"
             app:destination="@id/choferFragment" />
         <action
-            android:id="@+id/action_rolesFragment_to_localFragment"
-            app:destination="@id/localFragment" />
+            android:id="@+id/action_rolesFragment_to_menu_local_Fragment"
+            app:destination="@id/menu_local_Fragment" />
     </fragment>
     <fragment
         android:id="@+id/choferFragment"
@@ -36,15 +36,9 @@
             android:id="@+id/action_choferFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
         <action
-            android:id="@+id/action_choferFragment_to_rutaEstacionamientoFragment"
-            app:destination="@id/rutaEstacionamientoFragment" />
+            android:id="@+id/action_choferFragment_to_ruta_v2_Fragment"
+            app:destination="@id/ruta_v2_Fragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/localFragment"
-        android:name="com.example.controlpark.MenuLocalFragment"
-        android:label="Local"
-        tools:layout="@layout/fragment_menu_local" />
 
     <fragment
         android:id="@+id/perfilFragment"
@@ -56,6 +50,41 @@
         android:name="com.example.controlpark.RutaEstacionamientoFragment"
         android:label="fragment_ruta_estacionamiento"
         tools:layout="@layout/fragment_ruta_estacionamiento" />
+    <fragment
+        android:id="@+id/menu_local_Fragment"
+        android:name="com.example.controlpark.Menu_local_Fragment"
+        android:label="fragment_menu_local_"
+        tools:layout="@layout/fragment_menu_local_" >
+        <action
+            android:id="@+id/action_menu_local_Fragment_to_crearLocalFragment"
+            app:destination="@id/crearLocalFragment" />
+        <action
+            android:id="@+id/action_menu_local_Fragment_to_rutaFragment"
+            app:destination="@id/rutaFragment" />
+        <action
+            android:id="@+id/action_menu_local_Fragment_to_edit_localFragment"
+            app:destination="@id/edit_localFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crearLocalFragment"
+        android:name="com.example.controlpark.CrearLocalFragment"
+        android:label="fragment_crear_local"
+        tools:layout="@layout/fragment_crear_local" />
+    <fragment
+        android:id="@+id/rutaFragment"
+        android:name="com.example.controlpark.RutaFragment"
+        android:label="fragment_ruta"
+        tools:layout="@layout/fragment_ruta" />
+    <fragment
+        android:id="@+id/ruta_v2_Fragment"
+        android:name="com.example.controlpark.Ruta_v2_Fragment"
+        android:label="fragment_ruta_v2_"
+        tools:layout="@layout/fragment_ruta_v2_" />
+    <fragment
+        android:id="@+id/edit_localFragment"
+        android:name="com.example.controlpark.edit_localFragment"
+        android:label="fragment_edit_local"
+        tools:layout="@layout/fragment_edit_local" />
 
 
 </navigation>

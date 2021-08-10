@@ -10,6 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
@@ -18,19 +19,20 @@
 
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textColor="@color/purple_500"
         android:text="Bienvenido " />
 
         <TextView
             android:id="@+id/textUsuario"
             android:layout_width="wrap_content"
-
+            android:textColor="@color/purple_500"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="" />
 
         <ImageView
             android:id="@+id/imgUsuario"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="30dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/logouser">
@@ -40,6 +42,7 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="318dp">
 
@@ -49,7 +52,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:background="@color/purple_200"
+        android:background="#E2FDD6"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 

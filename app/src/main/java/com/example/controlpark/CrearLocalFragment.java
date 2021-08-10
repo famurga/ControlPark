@@ -12,13 +12,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.controlpark.metodos.CargarEnBaseDatos;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,22 +33,19 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
+public class CrearLocalFragment extends Fragment implements OnMapReadyCallback {
 
     GoogleMap mgoogleMap;
     MapView mapView;
     View mview;
-
-
-    TextView  txtLatitud;
-    TextView txtLongitud;
     Button gps;
 
     //Formulario
-    EditText name,dir,des,lat,lon,espacios;
+    EditText name,dir,des,lat,lon,espacios,precio;
     Button btncrear;
-    String nomb,lati,longi,espa, desc,dire;
-    double dlati,dlong;
+    String nomb,lati,longi,espa, desc,dire,preci;
+    double dlati,dlong,dprecio;
+    int iespacios;
 
     DatabaseReference mDataBase;
 
@@ -63,7 +59,7 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mview= inflater.inflate(R.layout.fragment_menu_local, container, false);
+        mview= inflater.inflate(R.layout.fragment_crear_local, container, false);
         mDataBase = FirebaseDatabase.getInstance().getReference();
 
         int permisoUbicacion = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
@@ -85,8 +81,7 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
 
 
 
-        txtLatitud = mview.findViewById(R.id.txtLati);
-        txtLongitud = mview.findViewById(R.id.txtLon);
+
         gps = mview.findViewById(R.id.btngps);
         //Formulario
         name=mview.findViewById(R.id.edtNombre);
@@ -95,6 +90,7 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
         lat=mview.findViewById(R.id.edtLat);
         lon=mview.findViewById(R.id.edtLong);
         espacios=mview.findViewById(R.id.edtEspacios);
+        precio=mview.findViewById(R.id.edtPrecio);
         btncrear=mview.findViewById(R.id.btnCrear);
 
 
@@ -118,12 +114,30 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
                 lati = lat.getText().toString();
                 longi = lon.getText().toString();
                 espa = espacios.getText().toString();
+                preci= precio.getText().toString();
 
-                dlati = Double.parseDouble(lati);
-                dlong = Double.parseDouble(longi);
+                if(!lati.isEmpty() || !longi.isEmpty()|| !preci.isEmpty()){
+                    dlati = Double.parseDouble(lati);
+                    dlong = Double.parseDouble(longi);
+                    iespacios =Integer.parseInt(espa);
+                    dprecio =Double.parseDouble(preci);
 
-                CargarEnBaseDatos c = new CargarEnBaseDatos();
-                c.cargarDatosFirebase(nomb,dire,desc,dlati,dlong,espa);
+                }
+                else{
+                    Toast.makeText(getContext(),"Debe obtener la ubicación", Toast.LENGTH_SHORT).show();
+                }
+
+
+                if( nomb.isEmpty() || dire.isEmpty() || desc.isEmpty()  || lati.isEmpty()  || longi.isEmpty()  || espa.isEmpty()  ){
+                    Toast.makeText(getContext(), "Tiene que ingresar todos los campos", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    CargarEnBaseDatos c = new CargarEnBaseDatos();
+                    c.cargarDatosFirebase(nomb,dire,desc,dlati,dlong,iespacios,dprecio);
+                    Toast.makeText(getContext(), "Estacionamiento Creado", Toast.LENGTH_SHORT).show();
+
+                }
+
 
             }
         });
@@ -181,8 +195,8 @@ public class MenuLocalFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onLocationChanged(Location location) {
 
-                txtLatitud.setText(String.valueOf(location.getLatitude()));
-                txtLongitud.setText(String.valueOf(location.getLongitude()));
+              lat.setText(String.valueOf(location.getLatitude()));
+                lon.setText(String.valueOf(location.getLongitude()));
 
 
             }

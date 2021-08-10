@@ -2,54 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MenuLocalFragment">
+    android:layout_height="match_parent"
+    tools:context=".edit_localFragment">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="318dp">
-
-    </com.google.android.gms.maps.MapView>
-    <Button
-        android:id="@+id/btngps"
-        android:layout_width="wrap_content"
-        android:text="COORDENADAS"
-        android:layout_height="wrap_content">
-
-    </Button>
     <TextView
-        android:id="@+id/txtLati"
         android:layout_width="wrap_content"
-        android:text="lat"
-        android:layout_height="wrap_content">
-
-    </TextView>
-    <TextView
-        android:id="@+id/txtLon"
-        android:layout_width="wrap_content"
-        android:text="lon"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="Actualizar Estacionamiento"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/purple_700"
+        android:layout_marginTop="20dp">
 
     </TextView>
 
+    <ImageView
+        android:layout_width="92dp"
+        android:layout_height="87dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/p">
 
+    </ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Nombre Playa:">
 
         </TextView>
         <EditText
             android:id="@+id/edtNombre"
             android:layout_width="match_parent"
+            android:inputType="text"
             android:layout_height="wrap_content">
 
         </EditText>
@@ -61,16 +56,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Dirección:">
 
         </TextView>
         <EditText
             android:id="@+id/edtDir"
             android:layout_width="match_parent"
+            android:inputType="text"
             android:layout_height="wrap_content">
 
         </EditText>
@@ -81,30 +80,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Descripción:">
 
         </TextView>
         <EditText
             android:id="@+id/edtDesc"
             android:layout_width="match_parent"
+            android:inputType="text"
             android:layout_height="wrap_content">
 
         </EditText>
 
 
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btngps"
+        android:layout_width="wrap_content"
+        android:text="Obtener Dirección"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#E91E63"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content">
+
+    </Button>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:text="Latitud:">
 
@@ -123,10 +142,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Longitud:">
 
         </TextView>
@@ -144,31 +166,83 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Espacios Libres:">
+            android:text="Espacios Libres:"
+            android:textStyle="bold">
 
         </TextView>
         <EditText
             android:id="@+id/edtEspacios"
             android:layout_width="match_parent"
+            android:inputType="number"
             android:layout_height="wrap_content">
 
         </EditText>
 
 
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio:"
+            android:textStyle="bold">
+
+        </TextView>
+        <EditText
+            android:id="@+id/edtprecioso"
+            android:layout_width="match_parent"
+            android:inputType="number"
+            android:layout_height="wrap_content">
+
+        </EditText>
+
+
+
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+      android:layout_gravity="center"
+        android:orientation="horizontal">
+
+
     <Button
-        android:id="@+id/btnCrear"
-        android:text="Crear"
+        android:id="@+id/btnactualizar"
+        android:text="ACTUALIZAR"
         android:layout_gravity="center"
+        android:background="#E91E63"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </Button>
+    <Button
+        android:id="@+id/btndelete"
+        android:text="ELIMINAR"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:background="#E91E63"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+    </Button>
+    </LinearLayout>
 
 </LinearLayout>

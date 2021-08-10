@@ -43,7 +43,7 @@ public class RolesFragment extends Fragment {
         local.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(v).navigate(R.id.action_rolesFragment_to_localFragment);
+                Navigation.findNavController(v).navigate(R.id.action_rolesFragment_to_menu_local_Fragment);
 
             }
         });

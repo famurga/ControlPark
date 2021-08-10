@@ -48,14 +48,16 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.ViewHo
         String descripcion = model.get(position).getDescripcion();
         double latitud = model.get(position).getLatitud();
         double longitud = model.get(position).getLongitud();
-        int espacios = model.get(position).getEspaciosDisponibles();
+        int espacios = model.get(position).getEspacios();
+        double precio = model.get(position).getPrecio();
 
         holder.nombre.setText(nombre);
-        holder.direccion.setText(direccion);
+        /*holder.direccion.setText(direccion);*/
         holder.descripcion.setText(descripcion);
-        holder.latitud.setText(String.valueOf(latitud));
-        holder.longitud.setText(String.valueOf(longitud));
+        /*holder.latitud.setText(String.valueOf(latitud));
+        holder.longitud.setText(String.valueOf(longitud));*/
         holder.espacios.setText(String.valueOf(espacios));
+        holder.precio.setText(String.valueOf(precio));
 
     }
 
@@ -74,15 +76,16 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView nombre,  direccion, descripcion, latitud, longitud,espacios;
+        TextView nombre,  direccion, descripcion, latitud, longitud,espacios,precio;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nombre = itemView.findViewById(R.id.txtnombreEstacionamiento);
-            direccion = itemView.findViewById(R.id.txtDireccion);
+            /*direccion = itemView.findViewById(R.id.txtDireccion);*/
             descripcion = itemView.findViewById(R.id.txtDescripcion);
-            latitud = itemView.findViewById(R.id.txtlatitud);
-            longitud = itemView.findViewById(R.id.txtLongitud);
+            /*latitud = itemView.findViewById(R.id.txtlatitud);
+            longitud = itemView.findViewById(R.id.txtLongitud);*/
             espacios = itemView.findViewById(R.id.txtEspacios);
+            precio = itemView.findViewById(R.id.txtPrecio);
 
 
         }
