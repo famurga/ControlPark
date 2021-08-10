@@ -50,6 +50,7 @@ public class edit_localFragment extends Fragment implements OnMapReadyCallback {
     double dlati,dlong,dprecio;
     int iespacios;
     GoogleMap mgoogleMap;
+
     MapView mapView;
     String nombre,direccion,descripcion;
     double latitud,longitud,precio;
