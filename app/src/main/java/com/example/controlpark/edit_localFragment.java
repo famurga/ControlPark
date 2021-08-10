@@ -48,6 +48,7 @@ public class edit_localFragment extends Fragment implements OnMapReadyCallback {
     Button gps;
     DatabaseReference mDataBase;
     double dlati,dlong,dprecio;
+
     int iespacios;
     GoogleMap mgoogleMap;
 
